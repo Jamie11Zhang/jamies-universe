@@ -18,39 +18,32 @@
     <p class="intro-hint">click a planet to explore ✨</p>
 
     <div class="orbit-system" id="orbitSystem">
-      <!-- Central core = Jamie -->
-      <div class="core">
-        <div class="core-glow"></div>
-        <div class="core-text">
-          <span class="core-hello">hello, i'm</span>
-          <span class="core-name">Jamie</span>
-        </div>
+      <!-- Orbit rings (visual guides) -->
+      <div class="orbit orbit-1"></div>
+      <div class="orbit orbit-2"></div>
+      <div class="orbit orbit-3"></div>
+
+      <!-- Central sun = Jamie -->
+      <div class="sun">
+        <div class="sun-core"></div>
+        <span class="sun-label">Jamie</span>
       </div>
 
-      <!-- Orbit rings + planets -->
-      <!-- PROJECTS -->
-      <div class="orbit orbit-1">
-        <button class="planet" data-target="projects" style="--angle: 0deg;">
-          <canvas class="planet-canvas" data-planet="projects" width="110" height="110"></canvas>
-          <span class="planet-label">Projects</span>
-        </button>
-      </div>
+      <!-- Planets (positioned by JS) -->
+      <button class="planet planet--projects" data-target="projects" aria-label="Open Projects">
+        <span class="planet-body"></span>
+        <span class="planet-label">Projects</span>
+      </button>
 
-      <!-- LIFE -->
-      <div class="orbit orbit-2">
-        <button class="planet" data-target="life" style="--angle: 120deg;">
-          <canvas class="planet-canvas" data-planet="life" width="130" height="130"></canvas>
-          <span class="planet-label">Life</span>
-        </button>
-      </div>
+      <button class="planet planet--life" data-target="life" aria-label="Open Life">
+        <span class="planet-body"></span>
+        <span class="planet-label">Life</span>
+      </button>
 
-      <!-- ABOUT -->
-      <div class="orbit orbit-3">
-        <button class="planet" data-target="about" style="--angle: 240deg;">
-          <canvas class="planet-canvas" data-planet="about" width="100" height="100"></canvas>
-          <span class="planet-label">About</span>
-        </button>
-      </div>
+      <button class="planet planet--about" data-target="about" aria-label="Open About">
+        <span class="planet-body"></span>
+        <span class="planet-label">About</span>
+      </button>
     </div>
   </main>
 
@@ -173,8 +166,6 @@
     </div>
   </section>
 
-  <!-- Rough.js for hand-drawn planet doodles -->
-  <script src="https://cdn.jsdelivr.net/npm/roughjs@4.6.6/bundled/rough.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

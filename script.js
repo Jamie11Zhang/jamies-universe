@@ -1,7 +1,7 @@
 /* ===================================================
    Jamie's Universe — interactive orbit explorer
    - twinkling star field
-   - hand-drawn planets (Rough.js)
+   - realistic CSS planets orbiting a central sun
    - JS-driven orbital motion with pause-on-hover
    - click a planet to zoom into its detail view
    =================================================== */
@@ -46,63 +46,31 @@
   requestAnimationFrame(draw);
 })();
 
-/* ---------- 2. Hand-drawn planets with Rough.js ---------- */
-(function planets() {
-  if (typeof rough === 'undefined') return;
-
-  const palettes = {
-    projects: { fill: '#4a90e2', stroke: '#f0f6ff', ring: '#ffe9a8' },
-    life:     { fill: '#1e4d8c', stroke: '#a8d0f0', ring: '#4a90e2' },
-    about:    { fill: '#a8d0f0', stroke: '#f0f6ff', ring: '#ffe9a8' },
-  };
-
-  document.querySelectorAll('.planet-canvas').forEach((canvas) => {
-    const rc = rough.canvas(canvas);
-    const key = canvas.dataset.planet;
-    const p = palettes[key] || palettes.projects;
-    const cx = canvas.width / 2;
-    const cy = canvas.height / 2;
-    const r = canvas.width * 0.34;
-
-    rc.circle(cx, cy, r * 2, {
-      fill: p.fill, fillStyle: 'hachure', hachureGap: 5, fillWeight: 1.5,
-      stroke: p.stroke, strokeWidth: 2.5, roughness: 2,
-    });
-
-    const ctx = canvas.getContext('2d');
-    ctx.save();
-    ctx.translate(cx, cy);
-    ctx.rotate(-0.4);
-    rc.ellipse(0, 0, canvas.width * 0.92, canvas.width * 0.38, {
-      stroke: p.ring, strokeWidth: 2, roughness: 2.2, fill: 'none',
-    });
-    ctx.restore();
-
-    rc.circle(cx + r * 1.1, cy - r * 0.8, canvas.width * 0.09, {
-      fill: p.ring, fillStyle: 'solid', stroke: p.stroke, strokeWidth: 1.5, roughness: 1.8,
-    });
-  });
-})();
-
-/* ---------- 3. Orbital motion (JS-driven) ---------- */
+/* ---------- 2. Orbital motion (JS-driven) ----------
+   Each planet rides its own well-separated ring, so planets never
+   overlap: even if two line up in angle they sit at different radii. */
 (function orbits() {
   const system = document.getElementById('orbitSystem');
-  const planets = Array.from(document.querySelectorAll('.planet'));
+  // keep a fixed order: projects (inner), life (middle), about (outer)
+  const planets = [
+    document.querySelector('.planet--projects'),
+    document.querySelector('.planet--life'),
+    document.querySelector('.planet--about'),
+  ];
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Each planet: its ring radius (as a fraction of half the box), angular speed, start angle
-  // radiusFrac = fraction of HALF the box; matches the ring sizes
-  // (.orbit-1 = 56% of box → radius 0.56 * half, etc.)
+  // radiusFrac mirrors the ring sizes: ring is X% of the box, so the
+  // orbit radius is (X% / 2) of the box = (X% ) * half / ... → we use
+  // ringWidthFrac/2 against half the box. ringWidthFrac: 0.50, 0.76, 1.00
   const config = [
-    { radiusFrac: 0.56, speed: 0.10, angle: 0 },                   // orbit-1 (Projects)
-    { radiusFrac: 0.78, speed: -0.072, angle: (2 * Math.PI) / 3 }, // orbit-2 (Life) reverse
-    { radiusFrac: 1.00, speed: 0.055, angle: (4 * Math.PI) / 3 },  // orbit-3 (About)
+    { ringFrac: 0.46, speed:  0.085, angle: -Math.PI / 2 },        // Projects — starts at top
+    { ringFrac: 0.74, speed: -0.060, angle:  Math.PI / 2 + 0.5 },  // Life — reverse direction
+    { ringFrac: 1.00, speed:  0.045, angle:  Math.PI + 0.3 },      // About — slowest
   ];
 
   let paused = false;
   let last = performance.now();
 
-  // pause on hover/focus of any planet
   planets.forEach((pl) => {
     ['mouseenter', 'focusin'].forEach((e) => pl.addEventListener(e, () => (paused = true)));
     ['mouseleave', 'focusout'].forEach((e) => pl.addEventListener(e, () => (paused = false)));
@@ -113,7 +81,7 @@
     const half = size / 2;
     planets.forEach((pl, i) => {
       const c = config[i];
-      const radius = half * c.radiusFrac;
+      const radius = half * c.ringFrac; // ring radius = (ringWidthFrac * box) / 2 = ringFrac * half
       const x = half + Math.cos(c.angle) * radius;
       const y = half + Math.sin(c.angle) * radius;
       pl.style.left = `${(x / size) * 100}%`;
@@ -136,7 +104,7 @@
   requestAnimationFrame(tick);
 })();
 
-/* ---------- 4. Click a planet → zoom into detail ---------- */
+/* ---------- 3. Click a planet → zoom into detail ---------- */
 (function navigation() {
   const universe = document.getElementById('universe');
   const planets = document.querySelectorAll('.planet');
@@ -169,12 +137,10 @@
   );
   backBtns.forEach((b) => b.addEventListener('click', closeDetail));
 
-  // Esc closes
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeDetail();
   });
 
-  // deep-link support (e.g. refresh on #projects)
   const initial = location.hash.replace('#', '');
   if (initial && document.getElementById(initial)) openDetail(initial);
 })();
