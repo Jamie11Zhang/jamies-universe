@@ -13,167 +13,164 @@
   <!-- Twinkling star canvas backdrop -->
   <canvas id="stars"></canvas>
 
-  <!-- Floating navigation -->
-  <nav id="nav">
-    <a href="#home" class="nav-link" data-label="home">🌌</a>
-    <a href="#projects" class="nav-link" data-label="projects">🪐</a>
-    <a href="#life" class="nav-link" data-label="life">🌍</a>
-    <a href="#about" class="nav-link" data-label="about">👾</a>
-  </nav>
+  <!-- ============ UNIVERSE / ORBIT VIEW ============ -->
+  <main id="universe" class="universe">
+    <p class="intro-hint">click a planet to explore ✨</p>
 
-  <!-- ============ LANDING / HERO ============ -->
-  <section id="home" class="section hero">
-    <div class="hero-inner">
-      <p class="hello">hello, i'm</p>
-      <h1 class="name">Jamie</h1>
-      <p class="tagline">welcome to my little universe ✨</p>
-
-      <!-- Stick-figure Jamie floating in space -->
-      <div class="astronaut-wrap">
-        <svg class="astronaut" viewBox="0 0 160 220" aria-label="Stick figure Jamie floating in space">
-          <!-- rocket pack flame -->
-          <path class="flame" d="M70 180 Q80 215 90 180 Q80 195 70 180 Z" />
-          <!-- body -->
-          <line class="chalk" x1="80" y1="90" x2="80" y2="150" />
-          <!-- head -->
-          <circle class="chalk head" cx="80" cy="65" r="25" />
-          <!-- helmet shine -->
-          <path class="chalk thin" d="M68 55 Q72 48 82 50" />
-          <!-- smile -->
-          <path class="chalk" d="M70 70 Q80 80 90 70" />
-          <!-- eyes -->
-          <circle class="dot" cx="72" cy="62" r="2.2" />
-          <circle class="dot" cx="88" cy="62" r="2.2" />
-          <!-- arms waving -->
-          <line class="chalk" x1="80" y1="105" x2="50" y2="90" />
-          <line class="chalk" x1="80" y1="105" x2="112" y2="118" />
-          <!-- legs floating -->
-          <line class="chalk" x1="80" y1="150" x2="60" y2="178" />
-          <line class="chalk" x1="80" y1="150" x2="100" y2="176" />
-        </svg>
+    <div class="orbit-system" id="orbitSystem">
+      <!-- Central core = Jamie -->
+      <div class="core">
+        <div class="core-glow"></div>
+        <div class="core-text">
+          <span class="core-hello">hello, i'm</span>
+          <span class="core-name">Jamie</span>
+        </div>
       </div>
 
-      <p class="scroll-hint">scroll to explore the planets ↓</p>
+      <!-- Orbit rings + planets -->
+      <!-- PROJECTS -->
+      <div class="orbit orbit-1">
+        <button class="planet" data-target="projects" style="--angle: 0deg;">
+          <canvas class="planet-canvas" data-planet="projects" width="110" height="110"></canvas>
+          <span class="planet-label">Projects</span>
+        </button>
+      </div>
+
+      <!-- LIFE -->
+      <div class="orbit orbit-2">
+        <button class="planet" data-target="life" style="--angle: 120deg;">
+          <canvas class="planet-canvas" data-planet="life" width="130" height="130"></canvas>
+          <span class="planet-label">Life</span>
+        </button>
+      </div>
+
+      <!-- ABOUT -->
+      <div class="orbit orbit-3">
+        <button class="planet" data-target="about" style="--angle: 240deg;">
+          <canvas class="planet-canvas" data-planet="about" width="100" height="100"></canvas>
+          <span class="planet-label">About</span>
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <!-- ============ DETAIL VIEWS ============ -->
+
+  <!-- PROJECTS -->
+  <section class="detail" id="projects" aria-hidden="true">
+    <button class="back-btn" data-back>← back to universe</button>
+    <div class="detail-inner">
+      <div class="detail-header">
+        <h2>🪐 Projects</h2>
+        <p class="detail-sub">things i built, studied &amp; grew</p>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <div class="card-icon">🧠</div>
+          <h3>Generative AI &amp; Student Competence</h3>
+          <p class="card-meta">Undergraduate Dissertation · Psychology Research</p>
+          <p>Explored how generative AI tools shape students' <em>perceived competence</em> and their actual academic performance — designing the study, running the experiment, and digging into what the data really said about learning in the AI era.</p>
+          <div class="tags"><span>Research</span><span>GenAI</span><span>Experiment Design</span></div>
+        </article>
+
+        <article class="card">
+          <div class="card-icon">📈</div>
+          <h3>Creator Growth @ TikTok</h3>
+          <p class="card-meta">Internship · Creator Growth</p>
+          <p>Worked on growing the creator ecosystem — understanding what makes creators thrive, spotting growth levers, and helping shape strategies that bring more voices onto the platform.</p>
+          <div class="tags"><span>Strategy</span><span>Creators</span><span>Growth</span></div>
+        </article>
+
+        <article class="card">
+          <div class="card-icon">🛠️</div>
+          <h3>Field Marketing Operations Platform</h3>
+          <p class="card-meta">Internship · Ant International</p>
+          <p>Helped design a Field Marketing Operations Platform — turning messy, manual marketing workflows into a smoother, more organized system that teams could actually rely on.</p>
+          <div class="tags"><span>Product</span><span>Ops</span><span>Design</span></div>
+        </article>
+      </div>
     </div>
   </section>
 
-  <!-- ============ PROJECTS ============ -->
-  <section id="projects" class="section">
-    <div class="planet-header">
-      <canvas class="planet-doodle" data-planet="projects" width="120" height="120"></canvas>
-      <h2>Projects</h2>
-      <p class="section-sub">things i built, studied & grew 🪐</p>
-    </div>
+  <!-- LIFE -->
+  <section class="detail" id="life" aria-hidden="true">
+    <button class="back-btn" data-back>← back to universe</button>
+    <div class="detail-inner">
+      <div class="detail-header">
+        <h2>🌍 Life</h2>
+        <p class="detail-sub">the stuff that makes me, me</p>
+      </div>
+      <div class="life-grid">
+        <article class="life-card">
+          <svg class="life-doodle" viewBox="0 0 100 100" aria-hidden="true">
+            <circle class="chalk" cx="50" cy="50" r="30" />
+            <path class="chalk thin" d="M20 50 Q50 30 80 50 Q50 70 20 50" />
+            <path class="chalk thin" d="M50 20 Q40 50 50 80" />
+            <path class="chalk thin" d="M50 20 Q60 50 50 80" />
+            <path class="plane" d="M30 35 L72 48 L58 54 L55 68 L50 56 Z" />
+          </svg>
+          <h3>✈️ Travel</h3>
+          <p>Collecting little pins across the map — new streets, new foods, new skies. Every trip is a doodle in my memory book.</p>
+        </article>
 
-    <div class="cards">
-      <article class="card" data-icon="brain">
-        <div class="card-icon">🧠</div>
-        <h3>Generative AI & Student Competence</h3>
-        <p class="card-meta">Undergraduate Dissertation · Psychology Research</p>
-        <p>Explored how generative AI tools shape students' <em>perceived competence</em> and their actual academic performance — designing the study, running the experiment, and digging into what the data really said about learning in the AI era.</p>
-        <div class="tags"><span>Research</span><span>GenAI</span><span>Experiment Design</span></div>
-      </article>
+        <article class="life-card">
+          <svg class="life-doodle" viewBox="0 0 100 100" aria-hidden="true">
+            <line class="chalk" x1="38" y1="25" x2="38" y2="70" />
+            <line class="chalk" x1="68" y1="18" x2="68" y2="63" />
+            <line class="chalk thin" x1="38" y1="25" x2="68" y2="18" />
+            <ellipse class="note" cx="32" cy="72" rx="9" ry="7" />
+            <ellipse class="note" cx="62" cy="65" rx="9" ry="7" />
+          </svg>
+          <h3>🎵 Music</h3>
+          <p>Always have a soundtrack playing. Music is the background score to everything I do — from focus mode to full-on living-room concerts.</p>
+        </article>
 
-      <article class="card" data-icon="growth">
-        <div class="card-icon">📈</div>
-        <h3>Creator Growth @ TikTok</h3>
-        <p class="card-meta">Internship · Creator Growth</p>
-        <p>Worked on growing the creator ecosystem — understanding what makes creators thrive, spotting growth levers, and helping shape strategies that bring more voices onto the platform.</p>
-        <div class="tags"><span>Strategy</span><span>Creators</span><span>Growth</span></div>
-      </article>
-
-      <article class="card" data-icon="platform">
-        <div class="card-icon">🛠️</div>
-        <h3>Field Marketing Operations Platform</h3>
-        <p class="card-meta">Internship · Ant International</p>
-        <p>Helped design a Field Marketing Operations Platform — turning messy, manual marketing workflows into a smoother, more organized system that teams could actually rely on.</p>
-        <div class="tags"><span>Product</span><span>Ops</span><span>Design</span></div>
-      </article>
+        <article class="life-card">
+          <svg class="life-doodle" viewBox="0 0 100 100" aria-hidden="true">
+            <circle class="chalk" cx="50" cy="50" r="28" />
+            <path class="chalk thin" d="M50 22 L62 42 L50 55 L38 42 Z" />
+            <line class="chalk thin" x1="50" y1="55" x2="50" y2="78" />
+            <line class="chalk thin" x1="62" y1="42" x2="78" y2="48" />
+            <line class="chalk thin" x1="38" y1="42" x2="22" y2="48" />
+          </svg>
+          <h3>⚽ Sports</h3>
+          <p>Moving, sweating, competing — sports keep me grounded and energized. Nothing beats the feeling right after a good game.</p>
+        </article>
+      </div>
     </div>
   </section>
 
-  <!-- ============ LIFE ============ -->
-  <section id="life" class="section">
-    <div class="planet-header">
-      <canvas class="planet-doodle" data-planet="life" width="120" height="120"></canvas>
-      <h2>Life</h2>
-      <p class="section-sub">the stuff that makes me, me 🌍</p>
-    </div>
-
-    <div class="life-grid">
-      <article class="life-card">
-        <svg class="life-doodle" viewBox="0 0 100 100" aria-hidden="true">
-          <circle class="chalk" cx="50" cy="50" r="30" />
-          <path class="chalk thin" d="M20 50 Q50 30 80 50 Q50 70 20 50" />
-          <path class="chalk thin" d="M50 20 Q40 50 50 80" />
-          <path class="chalk thin" d="M50 20 Q60 50 50 80" />
-          <path class="plane" d="M30 35 L72 48 L58 54 L55 68 L50 56 Z" />
-        </svg>
-        <h3>✈️ Travel</h3>
-        <p>Collecting little pins across the map — new streets, new foods, new skies. Every trip is a doodle in my memory book.</p>
-      </article>
-
-      <article class="life-card">
-        <svg class="life-doodle" viewBox="0 0 100 100" aria-hidden="true">
-          <line class="chalk" x1="38" y1="25" x2="38" y2="70" />
-          <line class="chalk" x1="68" y1="18" x2="68" y2="63" />
-          <line class="chalk thin" x1="38" y1="25" x2="68" y2="18" />
-          <ellipse class="note" cx="32" cy="72" rx="9" ry="7" />
-          <ellipse class="note" cx="62" cy="65" rx="9" ry="7" />
-        </svg>
-        <h3>🎵 Music</h3>
-        <p>Always have a soundtrack playing. Music is the background score to everything I do — from focus mode to full-on living-room concerts.</p>
-      </article>
-
-      <article class="life-card">
-        <svg class="life-doodle" viewBox="0 0 100 100" aria-hidden="true">
-          <circle class="chalk" cx="50" cy="50" r="28" />
-          <path class="chalk thin" d="M50 22 L62 42 L50 55 L38 42 Z" />
-          <line class="chalk thin" x1="50" y1="55" x2="50" y2="78" />
-          <line class="chalk thin" x1="62" y1="42" x2="78" y2="48" />
-          <line class="chalk thin" x1="38" y1="42" x2="22" y2="48" />
-        </svg>
-        <h3>⚽ Sports</h3>
-        <p>Moving, sweating, competing — sports keep me grounded and energized. Nothing beats the feeling right after a good game.</p>
-      </article>
-    </div>
-  </section>
-
-  <!-- ============ ABOUT ============ -->
-  <section id="about" class="section">
-    <div class="planet-header">
-      <canvas class="planet-doodle" data-planet="about" width="120" height="120"></canvas>
-      <h2>About Me</h2>
-      <p class="section-sub">my little character sheet 👾</p>
-    </div>
-
-    <div class="character-sheet">
-      <div class="sheet-portrait">
-        <svg viewBox="0 0 160 180" aria-label="Doodle portrait of Jamie">
-          <circle class="chalk head" cx="80" cy="80" r="45" />
-          <path class="chalk" d="M62 85 Q80 100 98 85" />
-          <circle class="dot" cx="66" cy="72" r="3" />
-          <circle class="dot" cx="94" cy="72" r="3" />
-          <path class="chalk thin" d="M40 55 Q80 20 120 55" />
-          <path class="chalk thin" d="M55 48 Q60 40 70 44" />
-        </svg>
+  <!-- ABOUT -->
+  <section class="detail" id="about" aria-hidden="true">
+    <button class="back-btn" data-back>← back to universe</button>
+    <div class="detail-inner">
+      <div class="detail-header">
+        <h2>👾 About Me</h2>
+        <p class="detail-sub">my little character sheet</p>
       </div>
-      <div class="sheet-info">
-        <p class="bio">Hi! I'm Jamie — a curious human orbiting between <strong>research, product, and creativity</strong>. I love asking "why" (hello, psychology), building things that make life smoother, and chasing new experiences wherever they appear.</p>
-        <ul class="fun-facts">
-          <li><span>🎓</span> Studied how AI changes the way we learn</li>
-          <li><span>🚀</span> Built & grew things at TikTok and Ant International</li>
-          <li><span>🗺️</span> Travels for the stories, not the souvenirs</li>
-          <li><span>🎧</span> Can't work without a good playlist</li>
-          <li><span>💙</span> Favorite color: blue (clearly)</li>
-        </ul>
-        <a class="cta" href="#home">↑ back to the stars</a>
+      <div class="character-sheet">
+        <div class="sheet-portrait">
+          <svg viewBox="0 0 160 180" aria-label="Doodle portrait of Jamie">
+            <circle class="chalk head" cx="80" cy="80" r="45" />
+            <path class="chalk" d="M62 85 Q80 100 98 85" />
+            <circle class="dot" cx="66" cy="72" r="3" />
+            <circle class="dot" cx="94" cy="72" r="3" />
+            <path class="chalk thin" d="M40 55 Q80 20 120 55" />
+            <path class="chalk thin" d="M55 48 Q60 40 70 44" />
+          </svg>
+        </div>
+        <div class="sheet-info">
+          <p class="bio">Hi! I'm Jamie — a curious human orbiting between <strong>research, product, and creativity</strong>. I love asking "why" (hello, psychology), building things that make life smoother, and chasing new experiences wherever they appear.</p>
+          <ul class="fun-facts">
+            <li><span>🎓</span> Studied how AI changes the way we learn</li>
+            <li><span>🚀</span> Built &amp; grew things at TikTok and Ant International</li>
+            <li><span>🗺️</span> Travels for the stories, not the souvenirs</li>
+            <li><span>🎧</span> Can't work without a good playlist</li>
+            <li><span>💙</span> Favorite color: blue (clearly)</li>
+          </ul>
+        </div>
       </div>
     </div>
-
-    <footer class="footer">
-      <p>made with doodles & stardust · Jamie's Universe ✨</p>
-    </footer>
   </section>
 
   <!-- Rough.js for hand-drawn planet doodles -->
